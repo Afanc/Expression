@@ -11,10 +11,15 @@ test
 boxplot(t(test))
 
 scaled_test = scale(test)
+scaled_test
 
-x = apply(scaled_test, 1, mean)
-barplot(x)
-barplot(x)
+png('test2.png')
+hist(scaled_test)
+
+loged = log(scaled_test)
+
+png('test3.png')
+hist(loged)
 
 #data <- isa.in.silico(10, 10, 2)
 #normed.data <- isa.normalize(data[[1]])
