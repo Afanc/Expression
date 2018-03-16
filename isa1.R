@@ -1,13 +1,15 @@
 library(isa2)
 library(lattice)
-<<<<<<< HEAD
 library(topGO)
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 #gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 #gene_id = as.array(gene_id[,1]) #n'est plus utile car gene_id est dans rdata
-=======
->>>>>>> d20dd8815e00c2172cf41f98c8e3ba404ed99e7a
+library(biomaRt)
+
+#exp = read.csv("data/rpkm.csv", sep = ";")
+#exp = as.matrix(exp)
+#gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 
 Sys.time()
 #modules2 = isa(exp, thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
@@ -47,15 +49,14 @@ cmod3 = which(cmod3_i != 0)
 length(rmod3)
 length(cmod3)
 
-<<<<<<< HEAD
 #les nom des gènes dans les modules 1, 2 et 3
-=======
->>>>>>> d20dd8815e00c2172cf41f98c8e3ba404ed99e7a
+#gene_id = as.array(gene_id[,1])
+gene_id[1:5]
+#le gènes dans les modules 1, 2 et 3
 g_mod1 = gene_id[rmod1]
 g_mod2 = gene_id[rmod2]
 g_mod3 = gene_id[rmod3]
 
-<<<<<<< HEAD
 #droplevels
 g_mod1 = droplevels(g_mod1)
 g_mod1 = as.array(g_mod1)
@@ -65,7 +66,13 @@ g_mod1[1]
 typeof(g_mod1[1])
 g_mod2 = droplevels(g_mod2)
 g_mod3 = droplevels(g_mod3)
-=======
->>>>>>> d20dd8815e00c2172cf41f98c8e3ba404ed99e7a
+ensembl=useMart("ensembl")
+ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
+
+infos = getBM(attributes= c("ensembl_gene_id", "external_gene_name","description","interpro_description"), filters="ensembl_gene_id", values=g_mod1, mart=ensembl)
+
+infos
+
+
 
 
