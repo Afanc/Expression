@@ -1,5 +1,6 @@
 library(isa2)
 library(lattice)
+
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 
