@@ -1,5 +1,6 @@
 library(isa2)
 library(lattice)
+
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
