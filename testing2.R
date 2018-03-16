@@ -23,7 +23,6 @@ for(i in length(m$columns[1,])){
     exp = exp[c(which(ro), which(!ro)), c(which(col), which(!col))]
 
     return(exp)
-
 }
 
 #col = as.logical(m$columns[,1])

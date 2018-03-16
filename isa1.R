@@ -1,15 +1,22 @@
-#library(isa2)
+library(isa2)
+library(lattice)
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 
 Sys.time()
-modules2 = isa(exp, thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
+#modules2 = isa(exp, thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
 Sys.time()
 
+modules2
+
 Sys.time() #permet de savoir le temps que prend la fonction pour compiler
-modules = isa(exp)
+#modules = isa(exp)
 Sys.time()
+#modules
+
+#levelplot(as.matrix(modules2))
+images(as.matrix(modules2$rows), strip = FALSE, xlab = "", ylab = "")
 
 rmod1 = which(rmod1 != 0)
 cmod1 = which(cmod1 != 0)
