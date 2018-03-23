@@ -2,13 +2,13 @@
 library(isa2)
 library(lattice)
 library(topGO)
-<<<<<<< HEAD
 library(ALL)
 ## try http:// if https:// URLs are not supported
 source("https://bioconductor.org/biocLite.R")
 biocLite("ALL")
-=======
->>>>>>> ea799e37cb550cfe234d88db6b7e30ffc2d0c869
+library(biomaRt)
+
+
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 #gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
@@ -18,26 +18,35 @@ biocLite("ALL")
 #exp = as.matrix(exp)
 #gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 
-<<<<<<< HEAD
+#normalisation log des données
 epsilon = 0.04
 hist(log10(as.vector(as.matrix(exp+epsilon))),100)
 
 log_exp = log10(exp+epsilon)
 zscored_exp = scale(log_exp)
+
+#isa
 Sys.time()
 #modules2 = isa(log10(exp+epsilon), thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
 Sys.time()
 
-Sys.time() #permet de savoir le temps que prend la fonction pour compiler
-=======
->>>>>>> ea799e37cb550cfe234d88db6b7e30ffc2d0c869
+#Sys.time() #permet de savoir le temps que prend la fonction pour compiler
 #modules = isa(exp)
-#modules
+#Sys.time()
 
 #levelplot(as.matrix(modules2))
 #images(as.matrix(modules2$rows), strip = FALSE, xlab = "", ylab = "")
 
 #rmod_i contiennent les lignes des modules en binaire
+rmod = vector(,length(modules$rows[1,]))
+for(i in length(modules$rows[1,])){
+    rmod[i] = modules$rows[,i]
+    assign(paste("rmod", i, sep = ""), which(rmod1_i != 0))
+    assign(paste("g_mod",i, sep = ""), gene_id[i])
+    assign(paste("g_mod", i, sep= ""), droplevels(eval(parse(text = paste("g_mod",i,sep= ""))))) #marche pas
+}
+
+g_mod1
 
 #cmod_i contiennent les colonnes des modules en binaire
 #PAS ENCORE
@@ -47,7 +56,6 @@ cmod3_i = modules$rows[,3]
 cmod1 = which(cmod1_i != 0)
 #+droplevels
 
-<<<<<<< HEAD
 rmod2 = which(rmod2_i != 0)
 cmod2 = which(cmod2_i != 0)
 length(rmod2)
@@ -75,21 +83,18 @@ g_mod1
 typeof(g_mod1[1])
 g_mod2 = droplevels(g_mod2)
 g_mod3 = droplevels(g_mod3)
-=======
 ensembl = useMart("ensembl")
 ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
 
 infos = getBM(attributes= c("ensembl_gene_id", "external_gene_name","description","interpro_description"), filters="ensembl_gene_id", values=g_mod1, mart=ensembl)
 
 infos
->>>>>>> ea799e37cb550cfe234d88db6b7e30ffc2d0c869
 
-# GO 
+# GO, done with Sarvenaz
 data(ALL)
 data(geneList)
 library(topGO)
 
-<<<<<<< HEAD
 gene_universe = as.vector(modules$rows[,1])
 names(gene_universe) = gene_id [2:19902] # remove index in the future
 sampleGOdata <- new("topGOdata",
@@ -102,5 +107,3 @@ resultFisher <- runTest(sampleGOdata, algorithm = "classic", statistic = "fisher
 
 allRes <- GenTable(sampleGOdata, classicFisher = resultFisher
                    , ranksOf = "classicFisher", topNodes = 10)
-=======
->>>>>>> ea799e37cb550cfe234d88db6b7e30ffc2d0c869
