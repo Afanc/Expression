@@ -1,18 +1,27 @@
 library(isa2)
 library(lattice)
 library(topGO)
+library(ALL)
+## try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("ALL")
 #exp = read.csv("data/rpkm.csv", sep = ";")
 #exp = as.matrix(exp)
 #gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 #gene_id = as.array(gene_id[,1]) #n'est plus utile car gene_id est dans rdata
 library(biomaRt)
 
-#exp = read.csv("data/rpkm.csv", sep = ";")
+#exp = read.csv("data/rpkm.csv", sep = ";",header=False)
 #exp = as.matrix(exp)
 #gene_id = read.csv("C:/Users/leoje/Dropbox/uni/semestre 6/math/data/geneID.txt", sep = " ")
 
+epsilon = 0.04
+hist(log10(as.vector(as.matrix(exp+epsilon))),100)
+
+log_exp = log10(exp+epsilon)
+zscored_exp = scale(log_exp)
 Sys.time()
-#modules2 = isa(exp, thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
+#modules2 = isa(log10(exp+epsilon), thr.row = c(0.5, 1, 1.5, 2), thr.col = c(0.5, 1, 1.5, 2))
 Sys.time()
 
 Sys.time() #permet de savoir le temps que prend la fonction pour compiler
@@ -50,7 +59,7 @@ length(rmod3)
 length(cmod3)
 
 #les nom des gènes dans les modules 1, 2 et 3
-#gene_id = as.array(gene_id[,1])
+gene_id = as.array(gene_id[,1])
 gene_id[1:5]
 #le gènes dans les modules 1, 2 et 3
 g_mod1 = gene_id[rmod1]
@@ -62,17 +71,25 @@ g_mod1 = droplevels(g_mod1)
 g_mod1 = as.array(g_mod1)
 typeof(c(1:10))
 
-g_mod1[1]
+g_mod1
 typeof(g_mod1[1])
 g_mod2 = droplevels(g_mod2)
 g_mod3 = droplevels(g_mod3)
-ensembl=useMart("ensembl")
-ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
 
-infos = getBM(attributes= c("ensembl_gene_id", "external_gene_name","description","interpro_description"), filters="ensembl_gene_id", values=g_mod1, mart=ensembl)
+# GO 
+data(ALL)
+data(geneList)
+library(topGO)
 
-infos
+gene_universe = as.vector(modules$rows[,1])
+names(gene_universe) = gene_id [2:19902] # remove index in the future
+sampleGOdata <- new("topGOdata",
+                     description = "Simple session", ontology = "BP",
+                     allGenes = geneList, geneSel = function(a) a!=0,
+                     nodeSize = 10,
+                     annot = annFUN.db, affyLib = affyLib)
 
+resultFisher <- runTest(sampleGOdata, algorithm = "classic", statistic = "fisher")
 
-
-
+allRes <- GenTable(sampleGOdata, classicFisher = resultFisher
+                   , ranksOf = "classicFisher", topNodes = 10)
