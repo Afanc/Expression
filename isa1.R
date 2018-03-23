@@ -54,31 +54,12 @@ g_mod1
 
 #cmod_i contiennent les colonnes des modules en binaire
 #PAS ENCORE
-cmod1_i = modules$rows[,1]
-cmod2_i = modules$rows[,2]
-cmod3_i = modules$rows[,3]
-cmod1 = which(cmod1_i != 0)
-#+droplevels
-
-length(cmod2)
-cmod3 = which(cmod3_i != 0)
-length(cmod3)
+#cmod1_i = modules$rows[,1]
+#cmod2_i = modules$rows[,2]
+#cmod3_i = modules$rows[,3]
 
 #les nom des gènes dans les modules 1, 2 et 3
 #le gènes dans les modules 1, 2 et 3
-g_mod1 = gene_id[rmod1]
-g_mod2 = gene_id[rmod2]
-g_mod3 = gene_id[rmod3]
-
-#droplevels
-g_mod1 = droplevels(g_mod1)
-g_mod1 = as.array(g_mod1)
-typeof(c(1:10))
-
-g_mod1
-typeof(g_mod1[1])
-g_mod2 = droplevels(g_mod2)
-g_mod3 = droplevels(g_mod3)
 ensembl = useMart("ensembl")
 ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
 
