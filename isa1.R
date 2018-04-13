@@ -45,6 +45,7 @@ droplevelsthatworks = function(x){
 rmod = vector(,length(modules$rows[1,]))
 for(i in length(modules$rows[1,])){
     rmod[i] = modules$rows[,i]
+    #très moche, pas faire ça
     assign(paste("rmod", i, sep = ""), which(rmod1_i != 0))
     assign(paste("g_mod",i, sep = ""), gene_id[i])
     assign(paste("g_mod",i, sep = ""),  droplevelsthatworks(eval(parse(text = paste("g_mod",i, sep = "")))))
