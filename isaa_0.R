@@ -6,7 +6,7 @@ source("https://bioconductor.org/biocLite.R")
 library(biomaRt)
 
 
-exp = read.csv("data/rpkm.csv", sep = ",")
+exp = read.csv("data/rpkm.txt", sep = ",")
 exp = as.matrix(exp)
 
 #normalisation log des données
