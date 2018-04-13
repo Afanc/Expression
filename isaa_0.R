@@ -22,7 +22,8 @@ print("let's goooo\n")
 Sys.time()
 isa_out = list()
 i = 1
-for(threshold in seq(1,2)){
+rob = c(1,2)
+for(threshold in rob){
     m = isa(norm_expr, threshold)
     isa_out[[i]] = m
     i = i + 1
@@ -30,7 +31,7 @@ for(threshold in seq(1,2)){
     print(Sys.time())
 }
 
-save.image("images/first_test")
+save.image("images/isa1-2-1")
 
 
 #droplevelsthatworks = function(x){
