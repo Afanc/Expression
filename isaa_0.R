@@ -13,8 +13,6 @@ exp = as.matrix(exp)
 epsilon = 0.04
 
 pdf("log_expression.pdf")
-head(exp)
-exp+epsilon
 hist(log10(as.vector(as.matrix(exp+epsilon))),100)
 
 log_exp = log10(exp+epsilon)
