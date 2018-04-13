@@ -8,7 +8,7 @@ epsilon = 0.04
 log_exp = log10(exp+epsilon)
 norm_expr = scale(log_exp)
 
-thresholdzz = seq(0.5,6, by = 0.5)
+thresholdzz = seq(0.5,4, by = 0.25)
 
 print("let's goooo\n")
 print(Sys.time())

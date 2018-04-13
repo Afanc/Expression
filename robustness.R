@@ -1,5 +1,6 @@
-load("images/isa_out.Rdata")
+load("images/isa1-2-1")
 
+rob = c(1,2) #à reprendre
 robust_out = list()
 
 for(it in isa_out){
@@ -8,4 +9,5 @@ for(it in isa_out){
   i = i + 1
 }
 
+save.image("images/rob-1-2-1")
 
