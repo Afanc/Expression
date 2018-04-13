@@ -17,7 +17,7 @@ isa_out[[2]]$seeddata$rob
 
 summary(robust_out[[1]])
 summary(robust_out[[2]])
-boxplot(robust_out[[1]], robust_out[[2]])
+boxplot(robust_out)
 
 save.image("images/rob-1-2-1")
 
