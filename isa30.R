@@ -18,8 +18,10 @@ i = 1
 for(threshold in thresholdzz){
   m = isa(norm_expr, threshold)
   isa_out[[i]] = m
+
   print(paste("itération ",i, " terminée\n", sep=""))
   print(Sys.time())
+
   i = i + 1
 }
 
