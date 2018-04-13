@@ -17,7 +17,10 @@ isa_out[[2]]$seeddata$rob
 
 save.image("images/rob-1-2-1")
 
+pdf("results/rob1-2-1.pdf")
+
 length(robust_out)
 hist(as.numeric(robust_out[[1]]))
 hist(as.numeric(robust_out[[2]]))
 
+dev.off()
