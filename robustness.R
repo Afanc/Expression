@@ -4,9 +4,11 @@ isa_out = vector(mode = "list")
 i = 1
 for(threshold in seq(1,2)){
   isa_out[[i]] = paste("t_", threshold, sep = "")
-  assign(paste("t_ ", threshold, sep = ""),seq(1:10))
+  assign(paste("t_", threshold, sep = ""),seq(1:10))
   i = i + 1
 }
+
+isa_out[[1]]
 
 robust_out = list()
 
