@@ -1,3 +1,5 @@
+#!/usr/bin/R
+
 load("images/isa1-2-1")
 
 rob = c(1,2) #à reprendre
