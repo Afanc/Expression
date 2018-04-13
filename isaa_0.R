@@ -1,10 +1,5 @@
 #!/usr/bin/R
 library(isa2)
-library(lattice)
-library(topGO)
-source("https://bioconductor.org/biocLite.R")
-library(biomaRt)
-
 
 exp = read.csv("data/rpkm.txt", sep = ",")
 exp = as.matrix(exp)
@@ -26,9 +21,11 @@ rob = c(1,2)
 for(threshold in rob){
     m = isa(norm_expr, threshold)
     isa_out[[i]] = m
-    i = i + 1
+
     print(paste("itération ",i, " terminée\n", sep=""))
     print(Sys.time())
+
+    i = i + 1
 }
 
 save.image("images/isa1-2-1")
