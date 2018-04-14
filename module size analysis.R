@@ -12,11 +12,11 @@ for(it in 1:length(isa_out)){
 
 pdf("results/size-05-6-05.pdf")
 
-for(i in 1:length(msize_out)){
-    hist(msize_out[[i]])
-}
+boxplot(msize_out, names = thresholdzz, main = "size vs thresholds")
 
-boxplot(msize_out)
+for(i in 1:length(msize_out)){
+    hist(msize_out[[i]], main = paste("size = ", thresholdzz[i], sep=""))
+}
 
 dev.off()
 

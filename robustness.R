@@ -24,7 +24,7 @@ pdf("results/rob05-6-05.pdf")           #A CHANGER
 boxplot(robust_out, names=thresholdzz, main="robust vs thresholds")
 
 for(i in 1:length(isa_out)){
-    hist(as.numeric(robust_out[[i]]), main=paste("robustness = ", i, sep=""))
+    hist(as.numeric(robust_out[[i]]), main=paste("robustness = ", thresholdzz[i], sep=""))
 }
 
 dev.off()
