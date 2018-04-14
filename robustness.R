@@ -1,6 +1,6 @@
 #!/usr/bin/R
 
-load("images/isa1-2-1")
+load("images/isa05-6-05")
 
 thresh = thresholdzz
 robust_out = list()
@@ -19,7 +19,7 @@ for(i in 1:length(isa_out)){
     summary(robust_out[[i]])
 }
 
-pdf("results/rob1-2-1.pdf")
+pdf("results/rob05-6-05.pdf")           #A CHANGER
 
 boxplot(robust_out, names=thresholdzz, main="robust vs thresholds")
 
@@ -29,4 +29,4 @@ for(i in 1:length(isa_out)){
 
 dev.off()
 
-save.image("images/rob-1-2-1")
+save.image("images/rob-05-6-05")        #A CHANGER
