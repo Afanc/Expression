@@ -1,8 +1,7 @@
-load("C:/Users/leoje/isa1-2-1")
-
+#!/usr/bin/R
+load("images/isa05-6-05")
 
 msize_out = list()
-
 
 i = 1
 for(it in 1:length(isa_out)){
@@ -11,10 +10,14 @@ for(it in 1:length(isa_out)){
   i = i + 1
 }
 
+pdf("results/size-05-6-05.pdf")
 
-length(msize_out[[1]])
-length(msize_out[[2]])
+for(i in 1:length(msize_out)){
+    hist(msize_out[[i]])
+}
 
-hist(msize_out[[1]])
-hist(msize_out[[2]])
 boxplot(msize_out)
+
+dev.off()
+
+save.image("images/size-05-6-05")
