@@ -33,19 +33,21 @@ dev.off()
 
 save.image("images/normed_rob-05-6-05")        #A CHANGER
 
-
-
-typeof(msize_out)
-summary(msize_out)
-unsize = unlist(msize_out)
-summary(unsize)
-unsize[1:5]
+unsize = unlist(msize_out) #Rmagic <3
 unrob = unlist(robust_out)
+
 grp = c()
 x = 1
 for(i in seq(0.5,4, 0.25)){
-  grp = append(grp, rep(i, times = length(msize_out[[x]])))
+  grp = append(grp, rep(i, times = length(msize_out[[x]]))) #rep the treshold, times = len of module
   x = x + 1
 }
 
-plot(unsize, unrob, col = rainbow(15)[as.factor(grp)])
+plot(unsize, unrob, col = rainbow(15)[as.factor(grp)],
+     main = "Size vs robustness of modules between thresholds",
+     xlab = "Size",
+     ylab = "Robustness",
+     xlim = c(0, 8000)) #so faboulous 
+legend(x ="topright", legend = unique(grp), fill = rainbow(15), cex = 0.7)
+sel = unsize< 500 & unrob > 100
+plot(unsize[sel], unrob[sel])
