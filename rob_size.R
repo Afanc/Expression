@@ -21,7 +21,7 @@ for(i in 1:length(robust_out)){
     normed_rob[[i]] = robust_out[[i]]/msize_out[[i]]
 }
 
-pdf("results/test.pdf")           #A CHANGER
+pdf("results/rob_vs_size.pdf")           #A CHANGER
 
 robust_out
 msize_out
