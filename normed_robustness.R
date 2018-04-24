@@ -31,7 +31,7 @@ for(i in 1:length(isa_out)){
 
 dev.off()
 
-save.image("images/normed_rob-05-6-05")        #A CHANGER
+pdf("results/rob_size2.pdf")
 
 unsize = unlist(msize_out) #Rmagic <3
 unrob = unlist(robust_out)
@@ -51,3 +51,7 @@ plot(unsize, unrob, col = rainbow(15)[as.factor(grp)],
 legend(x ="topright", legend = unique(grp), fill = rainbow(15), cex = 0.7)
 sel = unsize< 500 & unrob > 100
 plot(unsize[sel], unrob[sel])
+
+dev.off()
+
+save.image("images/normed_rob-05-6-05")        #A CHANGER
