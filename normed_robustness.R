@@ -8,18 +8,23 @@ msize_out = list()
 i = 1
 for(it in 1:length(isa_out)){
   robu = isa_out[[it]]$seeddata$rob
-  robust_out[[i]] = robu
+  robust_out[[it]] = robu
 
   msize = colSums(isa_out[[it]]$rows != 0)
-  msize_out[[i]] = msize
-
-  i = i + 1
+  msize_out[[it]] = msize
+  
 }
+
+str(msize_out)
+
+length(unlist(msize_out))
 
 normed_rob = list()
 for(i in 1:length(robust_out)){
     normed_rob[[i]] = robust_out[[i]]/msize_out[[i]]
 }
+
+
 
 pdf("results/normed_rob05-6-05.pdf")           #A CHANGER
 
@@ -35,6 +40,8 @@ pdf("results/rob_size2.pdf")
 
 unsize = unlist(msize_out) #Rmagic <3
 unrob = unlist(robust_out)
+
+length(unsize)
 
 grp = c()
 x = 1

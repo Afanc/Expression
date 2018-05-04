@@ -1,13 +1,16 @@
 #!/usr/bin/R
 library(isa2)
 
-#load("../images/isa05-6-05")
+load("../images/isa05-6-05")
 
 typeof(isa_out[[1]])
 length(isa_out)
 
-all_columns =  matrix(nrow = length(isa_out[[1]]$columns[,1]))
-all_rows =  matrix(nrow = length(isa_out[[1]]$rows[,1]))
+isat = isa_out[[1]]
+isat
+
+all_indiv =  matrix(nrow = length(isa_out[[1]]$columns[,1])) #individus
+all_genes =  matrix(nrow = length(isa_out[[1]]$rows[,1])) #contient les gènes
 
 norm_all = isa.normalize(norm_expr)
 
@@ -21,49 +24,47 @@ for(i in 1:length(isa_out)){
 #
 #    print(size_index)
 
-    all_columns = cbind(isa_out[[i]]$columns, all_columns)
-    all_rows = cbind(isa_out[[i]]$rows, all_rows)
+    all_indiv = cbind(isa_out[[i]]$columns, all_indiv)
+    all_genes = cbind(isa_out[[i]]$rows, all_genes)
 }
 
-all_columns
-#all_modules = list(columns = all_columns, rows = all_rows)
+str(isa_out)
+
+
+all_indiv
+#all_modules = list(columns = all_indiv, rows = all_genes)
 
 #unique_modules = isa.unique(norm_all, all_modules)
 
 names(isa_out[[1]])
 
-all_names = read.table("C:/Users/leoje/OneDrive/Documents/GitHub/Expression/data/geneID.txt", header = F)
-load("images/grp_unsize_unrob.Rdata")
-
+all_names = read.table("../data/geneID.txt", header = F)
 all_names = as.array(all_names[,1])
 
+load("../images/grp_unsize_unrob.Rdata")
+
+
+
 genenames = function(module){
-  column = all_columns[,module]
+  column = all_genes[,module]
   more0 = column > 0
   return(droplevels(all_names[more0]))
 }
 
 length(unrob)
 length(unsize)
-length(all_columns[1,])
+length(all_genes[1,])
 genenames(820)
 
-str(all_columns)
+str(all_genes)
 str(unrob)
 
 
 
-write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(1))),
-            sep = "\t", 
-            file = "export/module4pascal.txt",
-            append = F,
-            ncolumns = 19000)
-
-
-for (i in 1:ncol(all_columns)){
+for (i in 1:ncol(all_genes)){
   write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
         sep = "\t", 
-        file = "export/all_modules.txt",
+        file = "../export/all_modules",
         append = T,
         ncolumns = 19000)
 }
@@ -71,7 +72,7 @@ for (i in 1:ncol(all_columns)){
 m_quelconque = matrix()
 
 sel_goodmodules = unsize < 500 & unrob > 100
-for (i in seq(1:ncol(all_columns))[sel_goodmodules]){
+for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
   write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
         sep = "\t", 
         file = "export/all_modules.txt",
@@ -80,5 +81,5 @@ for (i in seq(1:ncol(all_columns))[sel_goodmodules]){
 
 }
 
-m_quelconque = all_columns[,sel_goodmodules]
+m_quelconque = all_genes[,sel_goodmodules]
 
