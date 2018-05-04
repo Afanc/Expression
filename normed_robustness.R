@@ -49,9 +49,14 @@ plot(unsize, unrob, col = rainbow(15)[as.factor(grp)],
      ylab = "Robustness",
      xlim = c(0, 8000)) #so faboulous 
 legend(x ="topright", legend = unique(grp), fill = rainbow(15), cex = 0.7)
+
 sel = unsize< 500 & unrob > 100
+which(sel)
 plot(unsize[sel], unrob[sel])
 
 dev.off()
 
 save.image("images/normed_rob-05-6-05")        #A CHANGER
+
+
+save(list = c("grp", "unsize", "unrob"), file = "images/grp_unsize_unrob.Rdata")
