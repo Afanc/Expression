@@ -42,6 +42,8 @@ all_columns
 names(isa_out[[1]])
 
 all_names = read.table("C:/Users/leoje/OneDrive/Documents/GitHub/Expression/data/geneID.txt", header = F)
+load("images/grp_unsize_unrob.Rdata")
+
 all_names = as.array(all_names[,1])
 
 genenames = function(module){
@@ -50,4 +52,37 @@ genenames = function(module){
   return(droplevels(all_names[more0]))
 }
 
-genenames(1)
+length(unrob)
+length(unsize)
+length(all_columns[1,])
+genenames(820)
+
+str(all_columns)
+str(unrob)
+
+
+
+write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(1))),
+            sep = "\t", 
+            file = "export/module4pascal.txt",
+            append = F,
+            ncolumns = 19000)
+
+
+for (i in 1:ncol(all_columns)){
+  write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
+        sep = "\t", 
+        file = "export/all_modules.txt",
+        append = T,
+        ncolumns = 19000)
+}
+
+sel_goodmodules = unsize< 500 & unrob > 100
+for (i in seq(1:ncol(all_columns))[sel_goodmodules]){
+  write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
+        sep = "\t", 
+        file = "export/all_modules.txt",
+        append = T,
+        ncolumns = 19000)
+}
+
