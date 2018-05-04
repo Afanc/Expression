@@ -1,7 +1,7 @@
 #!/usr/bin/R
 library(isa2)
 
-#load("C:/Users/leoje/OneDrive/Documents/GitHub/Expression/images/isa05-6-05")
+load("../images/isa05-6-05")
 
 typeof(isa_out[[1]])
 length(isa_out)
@@ -16,11 +16,17 @@ norm_all = isa.normalize(norm_expr)
 
 for(i in 1:length(isa_out)){
     current_isa = isa_out[[i]]
-    for(j in 1:length(current_isa$columns)){
-        if (current_isa$seeddata$rob > 100 & colSums(current_isa$rows != 0) < 1000) {
-            all_columns = cbind(isa_out[[i]]$columns[,j], all_columns)
-        }
-    }
+    rob_index = isa_out[[i]]$robustness > 100
+    size_index = colSums(isa_out[[i]]$columns != 0)
+
+    print(rob_index)
+    print(size_index)
+
+#    for(j in 1:length(current_isa$columns)){
+#        if (current_isa$seeddata$rob > 100 & colSums(current_isa$rows != 0) < 1000) {
+#            all_columns = cbind(isa_out[[i]]$columns[,j], all_columns)
+#        }
+#    }
 
 
 
