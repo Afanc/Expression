@@ -14,6 +14,10 @@ all_genes =  matrix(nrow = length(isa_out[[1]]$rows[,1])) #contient les gènes
 
 norm_all = isa.normalize(norm_expr)
 
+head(all_genes)
+head(all_indiv)
+
+
 #length(all_modules[,1])
 #length(isa_out[[1]]$columns[,1])
 
@@ -24,12 +28,15 @@ for(i in 1:length(isa_out)){
 #
 #    print(size_index)
 
-    all_indiv = cbind(isa_out[[i]]$columns, all_indiv)
-    all_genes = cbind(isa_out[[i]]$rows, all_genes)
+    all_indiv = cbind(all_indiv,isa_out[[i]]$columns)
+    all_genes = cbind(all_genes, isa_out[[i]]$rows)
 }
 
-str(isa_out)
+all_indiv = all_indiv[,2:length(all_indiv[1,])]
+all_genes = all_genes[,2:length(all_genes[1,])]
 
+dim(all_genes)
+head(all_genes)
 
 all_indiv
 #all_modules = list(columns = all_indiv, rows = all_genes)
@@ -60,22 +67,24 @@ str(all_genes)
 str(unrob)
 
 
+file.create("../export/all_modules.txt", showWarnings = FALSE)
 
 for (i in 1:ncol(all_genes)){
   write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/all_modules",
+        file = "../export/all_modules.txt",
         append = T,
         ncolumns = 19000)
 }
 
-m_quelconque = matrix()
 
 sel_goodmodules = unsize < 500 & unrob > 100
+file.create("../export/module4pascal.txt", showWarnings = FALSE)
+
 for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
   write(x = c(paste("module", i, sep = "_"), "isa",as.character(genenames(i))),
         sep = "\t", 
-        file = "export/all_modules.txt",
+        file = "../export/module4pascal.txt",
         append = T,
         ncolumns = 19000)
 
@@ -83,3 +92,4 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 
 m_quelconque = all_genes[,sel_goodmodules]
 
+length(which(sel_goodmodules))
