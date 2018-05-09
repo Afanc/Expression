@@ -1,25 +1,8 @@
 #!/usr/bin/R
-library(isa2)
-
 load("../images/isa05-6-05")
-
-typeof(isa_out[[1]])
-length(isa_out)
-
-isat = isa_out[[1]]
-isat
 
 all_indiv =  matrix(nrow = length(isa_out[[1]]$columns[,1])) #individus
 all_genes =  matrix(nrow = length(isa_out[[1]]$rows[,1])) #contient les gènes
-
-norm_all = isa.normalize(norm_expr)
-
-head(all_genes)
-head(all_indiv)
-
-
-#length(all_modules[,1])
-#length(isa_out[[1]]$columns[,1])
 
 for(i in 1:length(isa_out)){
 #    current_isa = isa_out[[i]]
@@ -32,41 +15,51 @@ for(i in 1:length(isa_out)){
     all_genes = cbind(all_genes, isa_out[[i]]$rows)
 }
 
-all_indiv = all_indiv[,2:length(all_indiv[1,])]
-all_genes = all_genes[,2:length(all_genes[1,])]
-
-dim(all_genes)
-head(all_genes)
-
-all_indiv
-#all_modules = list(columns = all_indiv, rows = all_genes)
-
-#unique_modules = isa.unique(norm_all, all_modules)
-
-names(isa_out[[1]])
+#----------------------- gene names 4 pascal ------------------------
 
 all_names = read.table("../data/geneID.txt", header = F)
 all_names = as.array(all_names[,1])
 
-load("../images/grp_unsize_unrob.Rdata")
+#convertit les genes ID du ficher de Sarvenaz en entreZ 
+# créée un data frame all_names 3 qui contient [,1] esng [,2] entrez
+library("biomaRt")
+mart <- useMart(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+all_names3 = getBM(attributes = c("ensembl_gene_id", "entrezgene"),
+      filters = "ensembl_gene_id",
+      values = all_names,
+      mart = mart)
+head(all_names3)
 
-source("https://bioconductor.org/biocLite.R")
-biocLite("biomaRt")
-
-
-genenames = function(module){
+#la meme fonction qu'avant, prend un module et donne les ENSG
+egenenames = function(module){
   column = all_genes[,module]
   more0 = column > 0
   return(droplevels(all_names[more0]))
 }
 
-length(unrob)
-length(unsize)
-length(all_genes[1,])
-genenames(820)
+#z gene names, convertit un module de ENSG vers entrez, 
+#mais avant teste si les l'equivalent existe dans all_names3.
+#problème: tout les modules testés pour l'instant ont des gènes manquants
 
-str(all_genes)
-str(unrob)
+zgenenames = function(olist){
+  bool = olist %in% all_names3[,1]
+  outlist = c()
+  if(FALSE %in% bool){ print("ERREUR: tout les gene ne sont pas dans la liste")
+    print(length(which(!bool)))
+    print(olist[which(!bool)])
+  }else{
+    for(i in 1:length(olist)){
+      lequel = which(all_names3[,1] == olist[i])
+      outlist[i] = all_names3[lequel,2]
+    }
+    
+  }
+  return(outlist)
+}
+
+
+load("../images/grp_unsize_unrob.Rdata") #on a besoin de usize et unrob 
+sel_goodmodules = unsize < 500 & unrob > 100
 
 
 file.create("../export/all_modules.txt", showWarnings = FALSE)
@@ -80,7 +73,7 @@ for (i in 1:ncol(all_genes)){
 }
 
 
-sel_goodmodules = unsize < 500 & unrob > 100
+
 file.create("../export/module4pascal.txt", showWarnings = FALSE)
 
 for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
@@ -92,6 +85,4 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 
 }
 
-m_quelconque = all_genes[,sel_goodmodules]
 
-length(which(sel_goodmodules))
