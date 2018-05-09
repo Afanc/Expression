@@ -50,6 +50,8 @@ all_names = as.array(all_names[,1])
 
 load("../images/grp_unsize_unrob.Rdata")
 
+source("https://bioconductor.org/biocLite.R")
+biocLite("biomaRt")
 
 
 genenames = function(module){
