@@ -31,7 +31,7 @@ genenames = function(module){
 #str(all_genes) # Compactly Display the Structure of an Arbitrary R Object
 #str(unrob)
 
-file.create("../export/all_modules_d.txt", showWarnings = FALSE)
+#file.create("../export/all_modules_d.txt", showWarnings = FALSE)
 
 #for (i in 1:ncol(all_genes)){
 #  write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
@@ -41,13 +41,13 @@ file.create("../export/all_modules_d.txt", showWarnings = FALSE)
 #        ncolumns = 19000)
 #}
 #
-sel_goodmodules = unsize < 500 & unrob > 100
+sel_goodmodules = unsize < 1000 & unrob > 50
 
 #str(unsize)
 #unsize[sel_goodmodules]
 #unsize[sel_goodmodules][1]
 #sel_goodmodules
-for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
+for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     print(paste("module : ", i, ", size : ", unsize[i], sep= ""))
 }
 
@@ -57,12 +57,20 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
+<<<<<<< HEAD
 file.create("../export/module4pascal_dtest.txt", showWarnings = FALSE)
+=======
+file.create("../export/module4pascal_lowfilter.txt", showWarnings = FALSE)
+>>>>>>> 07fa5502150bc2df27b99024cd345e430a02303b
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
+<<<<<<< HEAD
         file = "../export/module4pascal_dtest.txt",
+=======
+        file = "../export/module4pascal_lowfilter.txt",
+>>>>>>> 07fa5502150bc2df27b99024cd345e430a02303b
         append = T,
         ncolumns = 19000)
 }
