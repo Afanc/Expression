@@ -41,7 +41,7 @@ genenames = function(module){
 #        ncolumns = 19000)
 #}
 #
-sel_goodmodules = unsize < 1000 & unrob > 50
+sel_goodmodules = unsize < 500 & unrob > 100
 
 #str(unsize)
 #unsize[sel_goodmodules]
@@ -57,12 +57,12 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal_lowfliter.txt", showWarnings = FALSE)
+file.create("../export/module4pascal.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/module4pascal_lowfilter.txt",
+        file = "../export/module4pascal.txt",
         append = T,
         ncolumns = 19000)
 }
