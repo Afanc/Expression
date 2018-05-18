@@ -57,12 +57,12 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal_dtest.txt", showWarnings = FALSE)
+file.create("../export/module4pascal_lowfilter.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/module4pascal_dtest.txt",
+        file = "../export/module4pascal_low_filter.txt",
         append = T,
         ncolumns = 19000)
 }
