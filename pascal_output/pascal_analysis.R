@@ -1,3 +1,5 @@
+#!/usr/bin/R
+
 filelist = list.files(pattern = ".*.txt")
 
 #assuming tab separated values with a header    
