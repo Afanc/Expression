@@ -70,3 +70,16 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
         ncolumns = 19000)
 }
 
+
+
+all_names_ensg = read.table("../data/geneID.txt", header = F)
+all_names_ensg = as.array(all_names_ensg[,1])
+
+genenames_ensg = function(module){
+  column = all_genes[,module] 
+  more0 = column > 0
+  names = all_names_ensg[more0]
+  return(droplevels(names))
+}
+
+genenames_ensg(1)

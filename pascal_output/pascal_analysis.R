@@ -19,9 +19,19 @@ head(merged)
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
 
+head(pval)
+head(as.vector(pval[,2:18]))
+
 alpha = 0.05/(61)
 
-which(as.vector(pval[,2:18]) < alpha)
+#trouver le nom des 10 modules les plus significatifs pour Cynthia
+for(i in 1:10){#changer ici pour plus
+a = which(as.vector(pval[,2:ncol(pval)]) == sorted[i])
+col = floor(a / 61) + 2 #r magic <3
+mod = a - ((col-2) * 61)
+print(pval[mod,1])
+}
+
 
 #tentative de FDR
 
