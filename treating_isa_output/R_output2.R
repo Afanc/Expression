@@ -1,7 +1,7 @@
 #!/usr/bin/R
 library(isa2)
 
-#load("../images/isa05-6-05")
+load("../images/isa05-6-05")
 
 all_indiv =  matrix(nrow = length(isa_out[[1]]$columns[,1])) #individus
 all_genes =  matrix(nrow = length(isa_out[[1]]$rows[,1])) #contient les gènes
@@ -31,7 +31,7 @@ genenames = function(module){
 #str(all_genes) # Compactly Display the Structure of an Arbitrary R Object
 #str(unrob)
 
-file.create("../export/all_modules_d.txt", showWarnings = FALSE)
+#file.create("../export/all_modules_d.txt", showWarnings = FALSE)
 
 #for (i in 1:ncol(all_genes)){
 #  write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
@@ -41,13 +41,13 @@ file.create("../export/all_modules_d.txt", showWarnings = FALSE)
 #        ncolumns = 19000)
 #}
 #
-sel_goodmodules = unsize < 500 & unrob > 100
+sel_goodmodules = unsize < 1000 & unrob > 50
 
 #str(unsize)
 #unsize[sel_goodmodules]
 #unsize[sel_goodmodules][1]
 #sel_goodmodules
-for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
+for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     print(paste("module : ", i, ", size : ", unsize[i], sep= ""))
 }
 
@@ -57,12 +57,12 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal_d.txt", showWarnings = FALSE)
+file.create("../export/module4pascal_lowfilter.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/module4pascal_d.txt",
+        file = "../export/module4pascal_lowfilter.txt",
         append = T,
         ncolumns = 19000)
 }
