@@ -20,7 +20,8 @@ all_names = as.array(all_names[,1])
 load("../images/grp_unsize_unrob.Rdata")
 
 genenames = function(module){
-    column = all_genes[,module]
+    column = all_genes[,module] 
+    
     more0 = column > 0
     names = all_names[more0]
     names = names[-which(is.na(names))]
@@ -41,8 +42,10 @@ genenames = function(module){
 #        ncolumns = 19000)
 #}
 #
-sel_goodmodules = unsize < 500 & unrob > 100
-
+sel_goodmodules = unsize < 1000 & unrob > 73
+u1000 = unsize < 1000
+boxplot(unrob[u1000])
+summary(unrob[u1000])
 #str(unsize)
 #unsize[sel_goodmodules]
 #unsize[sel_goodmodules][1]
@@ -57,12 +60,12 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal.txt", showWarnings = FALSE)
+file.create("../export/module4pascal_lowlowfliter.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/module4pascal.txt",
+        file = "../export/module4pascal_lowlowfilter.txt",
         append = T,
         ncolumns = 19000)
 }
