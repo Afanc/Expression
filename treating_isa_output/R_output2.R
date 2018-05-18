@@ -57,20 +57,12 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-<<<<<<< HEAD
 file.create("../export/module4pascal_dtest.txt", showWarnings = FALSE)
-=======
-file.create("../export/module4pascal_lowfilter.txt", showWarnings = FALSE)
->>>>>>> 07fa5502150bc2df27b99024cd345e430a02303b
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-<<<<<<< HEAD
         file = "../export/module4pascal_dtest.txt",
-=======
-        file = "../export/module4pascal_lowfilter.txt",
->>>>>>> 07fa5502150bc2df27b99024cd345e430a02303b
         append = T,
         ncolumns = 19000)
 }
