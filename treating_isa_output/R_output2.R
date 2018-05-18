@@ -1,7 +1,7 @@
 #!/usr/bin/R
 library(isa2)
 
-#load("../images/isa05-6-05")
+load("../images/isa05-6-05")
 
 all_indiv =  matrix(nrow = length(isa_out[[1]]$columns[,1])) #individus
 all_genes =  matrix(nrow = length(isa_out[[1]]$rows[,1])) #contient les gènes
@@ -57,12 +57,12 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal_d.txt", showWarnings = FALSE)
+file.create("../export/module4pascal_dtest.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
-        file = "../export/module4pascal_d.txt",
+        file = "../export/module4pascal_dtest.txt",
         append = T,
         ncolumns = 19000)
 }
