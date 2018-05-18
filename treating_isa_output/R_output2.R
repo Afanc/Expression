@@ -57,12 +57,18 @@ for (i in seq(1:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
+<<<<<<< HEAD
 file.create("../export/module4pascal_dlowfil.txt", showWarnings = FALSE)
+=======
+>>>>>>> c0a04437a4eb3fd3f68ccba01dc7f7ae6f6f4d3a
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
         sep = "\t", 
+<<<<<<< HEAD
         file = "../export/module4pascal_dlowfil.txt",
+=======
+>>>>>>> c0a04437a4eb3fd3f68ccba01dc7f7ae6f6f4d3a
         append = T,
         ncolumns = 19000)
 }
