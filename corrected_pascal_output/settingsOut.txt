@@ -1,0 +1,98 @@
+settingsFile_	null
+wellRng_	org.apache.commons.math3.random.Well19937c@47105002
+jdkRng_	java.util.Random@7ff4d7c0
+version_	0.1 Alpha
+randomSeed_	2
+outputDirectory_	output
+outputSuffix_	
+verbose_	true
+snpPvalFile_	../gwas_collection_cardio/gwas_collection.csv
+pvalCol_	2
+withZScore_	false
+snpFilterFile_	
+refPopDirectory_	resources/1kg
+refPopFilePrefix_	EUR
+refPopFileExtension_	txt.gz
+genesToBeLoadedFile_	
+chromosome_	
+ignoreAllosomes_	true
+ignoreChrM_	true
+genomeAnnotation_	ucsc
+gencodeAnnotationFile_	resources/annotation/gencode/gencode.v15.annotation.gtf
+ucscAnnotationFile_	resources/annotation/ucsc/ucsc_known_genes_2013-09-03.txt
+bedAnnotationFile_	resources/annotation/bed/gene_coord.bed
+geneWiseSnpWeightsFile_	null
+weightFileFormat_	genewise
+loadOnlyProteinCodingGenes_	true
+geneIdMappingFile_	resources/annotation/gencode/ensembl_entrez_hugo_ids.txt
+dePhase_	true
+geneWindowUpstream_	50000
+geneWindowDownstream_	50000
+testStatisticNumSnps_	-1
+maxSnpsPerGene_	1000
+useMafCutoff_	0.05
+externalConvergenceCheck_	true
+maxPruningCutoff_	0.99
+useAnalyticVegas_	true
+useMaxVegas_	false
+useMaxEffVegas_	false
+useSimulationVegas_	false
+eigenValueFractionCut_	10000.0
+useOnlyGwasSnps_	true
+requestedAbsolutePrecision_	1.0E-16
+requestedRelativePrecision_	1.0E-6
+gslIntegrationLimit_	20000
+farebrotherMaxIterations_	100000
+farebrotherMode_	-1.0
+useFarebrother_	false
+useImhof_	false
+useDavies_	false
+daviesErrorBound_	1.0E-12
+daviesIntegrationTerms_	20000
+toleratedAbsolutePrecision_	1.0E-12
+toleratedRelativePrecision_	1.0E-6
+snpWeightingDelta_	[0.0]
+adaptiveNumSamples_	[10000, 100000, 1000000, 10000000]
+numSamplesGreaterCutoff_	100
+removeCodingSnpsOfOtherGenes_	false
+codingSnpsFile_	resources/gwas/snps/cdsmut_and_gene.ensembl.EUR.txt
+writeDetailedOutput_	false
+writeDetailedErrorOutput_	false
+writeSnpBedFile_	false
+writeTpedFile_	false
+saveGeneReports_	false
+writeCorFiles_	
+writeGenewiseSnpFiles_	
+writeUsedSettings_	output/settingsOut.txt
+runPathwayAnalysis_	true
+geneSetFile_	../../isa/export/module4pascal_lowlowfilter.txt
+excludedGenesFile_	resources/annotation/hla/hlaGenesEntrezIds.txt
+mergeGenesDistance_	1.0
+useSimulation_	true
+useSimulationWeightedSampling_	false
+maxNrOfSimulationsForEnrichment_	1000000
+useChi2_	true
+useRankSum_	false
+useHypGeom_	false
+hypGeomQuantiles_	[D@6477fcac
+useGamma_	false
+gammaShapeParameters_	[D@16db3bc
+useExpHyp_	false
+expHypParameters_	[D@4932fc5f
+loadScoresFromFiles_	false
+geneScoreFile_	output/EUR.ASN.CARDIoGRAMplusC4D_data_stage2.CAD_analyticRerun--msigBIOCARTA_KEGG_REACTOME_analyticRerun.genescores.txt
+metaGeneScoreFile_	output/EUR.ASN.CARDIoGRAMplusC4D_data_stage2.CAD_analyticRerun--msigBIOCARTA_KEGG_REACTOME_analyticRerun.meta.genescores.txt
+writeSignificanceThreshold_	1.0
+writeGeneScores_	true
+runConcatenateChromosomeResults_	false
+concatenateChromosomeResultsDir_	ChrRes
+deleteOriginals_	false
+useFakePhenotype_	false
+useFakeSignal_	false
+chanceOfSignal_	1.0E-5
+multipleOfPhenotype_	1
+deflationRate_	0.0
+deflationDist_	4000000
+onlyPathwayGenesAsBackground_	false
+gwasName_	gwas_collection
+chromFileExtension_	
