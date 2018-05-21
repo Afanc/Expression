@@ -1,12 +1,11 @@
+#!/usr/bin/R
 ############################################################################################################
 ############################################################################################################
 #### obtenir modules ####
     
 
-eQTL_list <- read.table("C:/Users/leoje/Downloads/colaus_FDR_005_cis_eQTL.txt", header = T); names(eQTL_list)
+eQTL_list <- read.table("./colaus_FDR_005_cis_eQTL.txt", header = T); names(eQTL_list)
 eQTL_list[1:5,]
-
-
 
 
 filelist <- list.files(path = "corrected_pascal_output", pattern = "module4pascal--sum")
@@ -101,7 +100,7 @@ add_snpToGeneID <- function(mod) {
       }}}
   
   write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
-  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/eQTL_output.txt", showWarnings = FALSE)
+  file.create("./eqtl/eQTL_output.txt", showWarnings = FALSE)
   return(eQTL_output)
 }
                  
@@ -130,7 +129,7 @@ add_snpToGeneID <- function(mod) {
     eQTL_output <- complete # there should be no error linked to the dimensions
     }
   write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
-  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/eQTL_output.txt", showWarnings = FALSE)
+  file.create("./eqtl/eQTL_output.txt", showWarnings = FALSE)
   return(eQTL_output)
 }
 
