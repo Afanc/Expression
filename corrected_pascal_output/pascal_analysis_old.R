@@ -36,9 +36,8 @@ for(i in 1:10){
     a = which(as.vector(chisq[,2:ncol(chisq)]) == sorted_chisq[i])
     col = floor(a / correction_factor) + 2 #r magic <3
     mod = a - ((col-2) * correction_factor)
-    print("Module : ")
+    print(droplevels(merged[[1]][mod]))
     print(chisq[mod,col])
-    print(droplevels(merged[[1]][col]))
 }
 
 #pval[,2:ncol(pval)]
