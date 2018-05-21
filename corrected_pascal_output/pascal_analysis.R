@@ -28,15 +28,16 @@ sorted = sort(as.vector(pval[,2:11]), decreasing = F)
 
 #trouver le nom des 10 modules les plus significatifs pour Cynthia
 for(i in 1:10){#changer ici pour plus
-a = which(as.vector(pval[,2:ncol(pval)]) == sorted[i])
-col = floor(a / 61) + 2 #r magic <3
-mod = a - ((col-2) * 61)
-print(pval[mod,1])
+    a = which(as.vector(pval[,2:ncol(pval)]) == sorted[i])
+    print(a)
+    col = floor(a / 61) + 2 #r magic <3
+    mod = a - ((col-2) * 61)
+    print(pval[mod,1])
 }
 
 #tentative de FDR
 
-
+sorted = sorted*61
 head(sorted)
 
 for(i in 1:length(sorted)){
