@@ -77,8 +77,7 @@ genenames_ensg(1) ## === gene IDs du module 1, go check pour vec_module[1]
 ############################################################################################################
 #### croiser chaque module avec eQTL_list ####
 
-eQTL_output <- matrix(NA, nrow = 200000, ncol = 200)
-
+eQTL_output <- matrix(NA, nrow = 200000, ncol = 600)
 ## builds an output for one module
 add_snpToGeneID <- function(mod) {
   
@@ -88,7 +87,7 @@ add_snpToGeneID <- function(mod) {
   for(i in 1:modgene_id) {
     for(j in 1:length(eQTL_list$snp_rs)) {
       if(modgene_id[i] == eQTL_list$gene_id[j]) {
-        snps <- eQTL_list$snp_rs[eQTL_list$gene_id==modgene_id[i]] ## vecteur de snprs
+        snps <- eQTL_list$snp_rs[eQTL_list$gene_id==modgene_id[i]] ## vecteur de snp_rs
         
         ## there will be an error with the dimensions if the rows are not all of the same length
         ## a solution is to add NAs to the empty cells.
@@ -101,9 +100,9 @@ add_snpToGeneID <- function(mod) {
         
       }}}
   
-  
-  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/snp_id.txt", showWarnings = FALSE)
+  write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
+  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/eQTL_output.txt", showWarnings = FALSE)
   return(eQTL_output)
 }
                  
-add_snpToGeneID(1) ## le file est bien créé, mais est vide .....
+add_snpToGeneID(692) ## le file est bien créé, mais est vide .....
