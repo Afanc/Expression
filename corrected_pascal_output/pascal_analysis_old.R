@@ -14,7 +14,7 @@ for(i in 2:length(datalist)){
 mergenames = c("Names", paste(rep(substr(filelist[1:length(filelist)],start = 5, stop = 25),each = 2), rep(c("chisq", "pval"), times = 10)))
 names(merged) = mergenames
 
-merged
+head(merged)
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
 chisq = as.matrix(merged[,seq(2, 34, by = 2)])
@@ -28,16 +28,17 @@ sorted_chisq = as.numeric(sorted_chisq)
 correction_factor = 61
 
 head(sorted*correction_factor)
-head(sorted_chisq*correction_factor)
+head(sorted_chisq)
 
 pval[,2:ncol(pval)]
 chisq[,2:ncol(chisq)]
 
+i= 1 #[52,5]
 for(i in 1:10){
     a = which(as.vector(chisq[,2:ncol(chisq)]) == sorted_chisq[i])
     col = floor(a / correction_factor) + 2 #r magic <3
     mod = a - ((col-2) * correction_factor)
-    print(chisq[mod,1])
+    print(chisq[mod,col] * 61)
 }
 
 #le nom des modules
