@@ -106,3 +106,31 @@ add_snpToGeneID <- function(mod) {
 }
                  
 add_snpToGeneID(692) ## le file est bien créé, mais est vide .....
+                  
+   #### essai pour 1 seul gene               
+eQTL_output <- c()
+add_snpToGeneID <- function(mod) {
+  
+  modgene_id <- genenames_ensg(mod) ## taille de 5477 gènes
+  oneID <- modgene_id[1] ## changer d'indice si on veut un autre gène
+  snps <- c()
+  
+  
+  for(j in 1:length(eQTL_list$snp_rs[eQTL_list$gene_id==oneID])) {
+    snps <- eQTL_list$snp_rs[eQTL_list$gene_id==oneID] ## vecteur de snp_rs
+    
+    ## there will be an error with the dimensions if the rows are not all of the same length
+    ## a solution is to add NAs to the empty cells.
+    
+    semicomplete <- append(oneID, snps) # the row that is not complete
+    n <- length(semicomplete)
+    t <- ncol(eQTL_output) - n # number times to add NAs
+    
+    complete <- c(semicomplete, rep(NA, times=t)) # a complete row to replace in the matrix
+    eQTL_output <- complete # there should be no error linked to the dimensions
+    }
+  write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
+  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/eQTL_output.txt", showWarnings = FALSE)
+  return(eQTL_output)
+}
+
