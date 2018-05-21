@@ -6,10 +6,10 @@
 eQTL_list <- read.table("./colaus_FDR_005_cis_eQTL.txt", header = T); names(eQTL_list)
 eQTL_list[1:5,]
 
+
 filelist <- list.files(path = "corrected_pascal_output", pattern = "module4pascal--sum")
 ## assuming tab separated values with a header
 datalist = lapply(paste("corrected_pascal_output/",filelist, sep = ""), function(x)read.table(x, header=T)) 
-
 
 merged = datalist[[1]]
 for(i in 2:length(datalist)){
@@ -36,7 +36,6 @@ for(i in 1:10){#changer ici pour plus de modules significatifs
   print(pval[mod,1]) # retourne ID des modules, qu'il faut cross-eQTL
   vec_modules <- append(vec_modules, pval[mod,1])
 }
-
 
 
 ############################################################################################################
@@ -77,30 +76,26 @@ genenames_ensg(1) ## === gene IDs du module 1, go check pour vec_module[1]
 eQTL_output <- matrix(NA, nrow = 200000, ncol = 200)
 
 ## builds an output for one module
+
+mod = 1
+i = 1
+j = 1
 add_snpToGeneID <- function(mod) {
   
   modgene_id <- genenames_ensg(mod)
   snps <- c()
+  file.create("eqtl/snp_id.txt", showWarnings = FALSE, overwrite = T)
   
-  for(i in 1:modgene_id) {
-    for(j in 1:length(eQTL_list$snp_rs)) {
-      if(modgene_id[i] == eQTL_list$gene_id[j]) {
-        snps <- eQTL_list$snp_rs[eQTL_list$gene_id==modgene_id[i]] ## vecteur de snprs
+  for(i in 1:length(modgene_id)) {
+    snps = eQTL_list$snp_rs[eQTL_list$gene_id==as.character(modgene_id[i])]
+    if(length(snps) > 0){
         
         ## there will be an error with the dimensions if the rows are not all of the same length
         ## a solution is to add NAs to the empty cells.
         
-        semicomplete <- append(modgene_id[i], snps) # the row that is not complete (yet)
-        n <- length(semicomplete)
-        t <- ncol(eQTL_output) - n # number times to add NAs
-        complete <- c(semicomplete, rep(NA, times=t)) # a complete row to replace in the matrix
-        eQTL_output[i] <- complete # there should be no error linked to the dimensions
+        semicomplete <- c(as.character(modgene_id[i]), snps) # the row that is not complete (yet)
+        write(semicomplete, file= "eqtl/snp_id.txt", append = T, sep = "\t", ncol = 20000)
         
       }}}
-  
-  
-  file.create("./eqtl/snp_id.txt", showWarnings = FALSE)
-  return(eQTL_output)
-}
                  
 add_snpToGeneID(1) ## le file est bien créé, mais est vide .....
