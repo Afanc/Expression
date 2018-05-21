@@ -1,6 +1,6 @@
 #!/usr/bin/R
 
-filelist = list.files(pattern = ".module4pascal--sum.txt")
+filelist = list.files(pattern = "module4pascal--sum.txt")
 
 #assuming tab separated values with a header    
 datalist = lapply(filelist, function(x)read.table(x, header=T)) 
@@ -18,6 +18,10 @@ head(merged)
 
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
+chisq = as.matrix(merged[,seq(2, 34, by = 2)])
+sorted_chi = sort(as.vector(chisq),decreasing = F)
+
+min(sorted_chi)
 
 head(pval)
 head(as.vector(pval[,2:18]))
@@ -25,6 +29,9 @@ head(as.vector(pval[,2:18]))
 alpha = 0.05/(61)
 
 sorted = sort(as.vector(pval[,2:11]), decreasing = F)
+sorted = as.numeric(sorted)
+min(sorted) < 0.05/61
+
 
 #trouver le nom des 10 modules les plus significatifs pour Cynthia
 for(i in 1:10){#changer ici pour plus
@@ -38,7 +45,7 @@ for(i in 1:10){#changer ici pour plus
 #tentative de FDR
 
 sorted = as.numeric(sorted)
-head(sorted*61)
+head(sorted_chi * 61)
 
 for(i in 1:length(sorted)){
   if(sorted[i] < (i/length(sorted))* 0.05){
@@ -46,4 +53,31 @@ for(i in 1:length(sorted)){
     #break()
   }
 }
+i = 1
+j = 5
 
+sig = c()
+for(j in 1:ncol(chisq)){
+  col = chisq[,j]
+  sor = sort(col, decreasing = F)
+  for(i in 1:length(sor)){
+    seuil = i/length(sor) * 0.05
+    if(sor[i] <= i/length(sor) * 0.05){
+      print("yey")
+      print(paste("col : ", j))
+      print(paste("mod  ", merged[,1][which(col == sor[i])]))
+      print(paste(sor[i], "vs", seuil))
+    }
+  }
+}
+
+for(i in 1:length(sorted_chi)){
+  if(sorted_chi[i] < (i/length(sorted_chi))* 0.05){
+    print(paste("result", i-1))
+    break()
+  }
+}
+
+library(qvalue)
+q = qvalue(chisq[,5])
+head(sort(q$qvalues))
