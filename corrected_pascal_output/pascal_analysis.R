@@ -25,6 +25,9 @@ head(as.vector(pval[,2:18]))
 alpha = 0.05/(61)
 
 sorted = sort(as.vector(pval[,2:11]), decreasing = F)
+sorted = as.numeric(sorted)
+min(sorted) < 0.05/61
+
 
 #trouver le nom des 10 modules les plus significatifs pour Cynthia
 for(i in 1:10){#changer ici pour plus
