@@ -60,7 +60,7 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
 #  print(module[more0])
 #}
 
-file.create("../export/module4pascal_lowlowfliter.txt", showWarnings = FALSE)
+file.create("../export/module4pascal_lowlowfilter.txt", showWarnings = FALSE)
 
 for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
     write(x = c(paste("module", i, sep = "_"), "isa", as.character(genenames(i))),
@@ -69,7 +69,6 @@ for (i in seq(0:ncol(all_genes))[sel_goodmodules]){
         append = T,
         ncolumns = 19000)
 }
-
 
 
 all_names_ensg = read.table("../data/geneID.txt", header = F)
