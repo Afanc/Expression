@@ -94,8 +94,8 @@ add_snpToGeneID <- function(mod) {
         eQTL_output[i] <- complete # there should be no error linked to the dimensions
       }}}
   
-  
-  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/snp_id.txt", showWarnings = FALSE)
+  write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
+  file.create("/home/synth/UNIL/4e + re4e semestre/Étude de cas mathématiques appliqués à la biologie/eqtl/eQTL_output.txt", showWarnings = FALSE)
   return(eQTL_output)
 }
                  
