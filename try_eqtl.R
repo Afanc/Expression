@@ -1,4 +1,3 @@
-#!/usr/bin/R
 ############################################################################################################
 ############################################################################################################
 #### obtenir modules ####
@@ -6,7 +5,6 @@
 
 eQTL_list <- read.table("./colaus_FDR_005_cis_eQTL.txt", header = T); names(eQTL_list)
 eQTL_list[1:5,]
-
 
 filelist <- list.files(path = "corrected_pascal_output", pattern = "module4pascal--sum")
 ## assuming tab separated values with a header
@@ -76,7 +74,8 @@ genenames_ensg(1) ## === gene IDs du module 1, go check pour vec_module[1]
 ############################################################################################################
 #### croiser chaque module avec eQTL_list ####
 
-eQTL_output <- matrix(NA, nrow = 200000, ncol = 600)
+eQTL_output <- matrix(NA, nrow = 200000, ncol = 200)
+
 ## builds an output for one module
 add_snpToGeneID <- function(mod) {
   
@@ -86,7 +85,7 @@ add_snpToGeneID <- function(mod) {
   for(i in 1:modgene_id) {
     for(j in 1:length(eQTL_list$snp_rs)) {
       if(modgene_id[i] == eQTL_list$gene_id[j]) {
-        snps <- eQTL_list$snp_rs[eQTL_list$gene_id==modgene_id[i]] ## vecteur de snp_rs
+        snps <- eQTL_list$snp_rs[eQTL_list$gene_id==modgene_id[i]] ## vecteur de snprs
         
         ## there will be an error with the dimensions if the rows are not all of the same length
         ## a solution is to add NAs to the empty cells.
@@ -99,37 +98,9 @@ add_snpToGeneID <- function(mod) {
         
       }}}
   
-  write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
-  file.create("./eqtl/eQTL_output.txt", showWarnings = FALSE)
+  
+  file.create("./eqtl/snp_id.txt", showWarnings = FALSE)
   return(eQTL_output)
 }
                  
-add_snpToGeneID(692) ## le file est bien créé, mais est vide .....
-                  
-   #### essai pour 1 seul gene               
-eQTL_output <- c()
-add_snpToGeneID <- function(mod) {
-  
-  modgene_id <- genenames_ensg(mod) ## taille de 5477 gènes
-  oneID <- modgene_id[1] ## changer d'indice si on veut un autre gène
-  snps <- c()
-  
-  
-  for(j in 1:length(eQTL_list$snp_rs[eQTL_list$gene_id==oneID])) {
-    snps <- eQTL_list$snp_rs[eQTL_list$gene_id==oneID] ## vecteur de snp_rs
-    
-    ## there will be an error with the dimensions if the rows are not all of the same length
-    ## a solution is to add NAs to the empty cells.
-    
-    semicomplete <- append(oneID, snps) # the row that is not complete
-    n <- length(semicomplete)
-    t <- ncol(eQTL_output) - n # number times to add NAs
-    
-    complete <- c(semicomplete, rep(NA, times=t)) # a complete row to replace in the matrix
-    eQTL_output <- complete # there should be no error linked to the dimensions
-    }
-  write(eQTL_output, file = "eQTL_output.txt", ncolumns = ncol(eQTL_output))
-  file.create("./eqtl/eQTL_output.txt", showWarnings = FALSE)
-  return(eQTL_output)
-}
-
+add_snpToGeneID(1) ## le file est bien créé, mais est vide .....
