@@ -11,8 +11,9 @@ for(i in 2:length(datalist)){
 }
 
 mergenames = c("Names", paste(rep(substr(filelist[1:length(filelist)],start = 5, stop = 25),each = 2), rep(c("chisq", "pval"), times = 10)))
-merged
 names(merged) = mergenames
+
+head(merged)
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
 chisq = as.matrix(merged[,seq(2, 34, by = 2)])
@@ -28,8 +29,9 @@ correction_factor = 61
 head(sorted_chisq)
 head(sorted_chisq*correction_factor)
 
-head(merged)
-merged[[1]]
+pval[,2:ncol(pval)]
+chisq[,2:ncol(chisq)]
+
 for(i in 1:10){
     a = which(as.vector(chisq[,2:ncol(chisq)]) == sorted_chisq[i])
     col = floor(a / correction_factor) + 2 #r magic <3
