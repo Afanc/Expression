@@ -37,8 +37,8 @@ for(i in 1:10){#changer ici pour plus
 
 #tentative de FDR
 
-sorted = sorted*61
-head(sorted)
+sorted = as.numeric(sorted)
+head(sorted*61)
 
 for(i in 1:length(sorted)){
   if(sorted[i] < (i/length(sorted))* 0.05){
