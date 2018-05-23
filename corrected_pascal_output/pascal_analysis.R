@@ -18,8 +18,17 @@ head(merged)
 
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
-chisq = as.matrix(merged[,seq(2, 34, by = 2)])
+chisq = as.matrix(merged[,c(1,seq(2, 34, by = 2))])
 sorted_chi = sort(as.vector(chisq),decreasing = F)
+sorted_chi5 = sort(as.vector(chisq[,5]),decreasing = F)
+
+i = 1
+for(i in 1:10){#changer ici pour plus
+  a = which(as.numeric(chisq[,2:ncol(chisq)]) == sorted_chi7[i])
+  col = ceiling(a / 61) #r magic <3
+  mod = a - ((col-1) * 61)
+  print(as.character(pval[mod,1]))
+}
 
 min(sorted_chi)
 
@@ -71,6 +80,8 @@ for(j in 1:ncol(chisq)){
   }
 }
 
+print(paste("mod  ", merged[,1][which(chisq[,5] == sort(chisq[,5])[5])]))
+
 for(i in 1:length(sorted_chi)){
   if(sorted_chi[i] < (i/length(sorted_chi))* 0.05){
     print(paste("result", i-1))
@@ -79,5 +90,35 @@ for(i in 1:length(sorted_chi)){
 }
 
 library(qvalue)
+
 q = qvalue(chisq[,5])
 head(sort(q$qvalues))
+
+
+hist(chisq[,5])
+qqnorm(chisq[,4])
+qqline(chisq[,4])
+
+qqnorm(-log(as.array(chisq)))
+qqline(-log(as.array(chisq)))
+
+plot(sort(-log(1:length(as.array(chisq)/length(as.array(chisq))))), -log(tail(sort(as.array(chisq), decreasing = T))))
+plot(sort(-log(1:length(as.array(chisq))/length(as.array(chisq)))),
+     -log(sort(as.array(chisq),decreasing = T))
+     ,main = "QQplot PASCAL"
+     ,xlab = "Expected -log(p)"
+     ,ylab = "Observed -log(p)")
+abline(a = 0, b= 1)
+
+plot(sort(-log(1:length(as.array(chisq[,5]))/length(as.array(chisq[,5])))),
+     -log(sort(as.array(chisq[,5]),decreasing = T))
+     ,main = "QQplot PASCAL\nCoronary artery disease"
+     ,xlab = "Expected -log(p)"
+     ,ylab = "Observed -log(p)")
+abline(a = 0, b= 1)
+
+
+
+
+
+

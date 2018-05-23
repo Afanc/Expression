@@ -32,3 +32,7 @@ for(i in 1:length(isa_out)){
 }
 
 dev.off()
+
+load("images/grp_unsize_unrob")
+
+msize_out[692]

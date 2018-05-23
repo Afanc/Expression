@@ -67,3 +67,13 @@ save.image("images/normed_rob-05-6-05")        #A CHANGER
 
 
 save(list = c("grp", "unsize", "unrob"), file = "images/grp_unsize_unrob.Rdata")
+
+unrob[649]
+
+plot(unsize[c(692,649,697,572)], unrob[c(692,649,697,572)] ,
+     main = "Size vs robustness of modules between thresholds",
+     xlab = "Size",
+     ylab = "Robustness",
+     xlim = c(0,400)) #so faboulous 
+text(unsize[c(692,649,697,572)], unrob[c(692,649,697,572)],
+     labels = c(692,649,697,572), cex= 0.5, pos = 2)
