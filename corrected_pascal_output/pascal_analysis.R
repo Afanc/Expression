@@ -18,28 +18,46 @@ head(merged)
 
 
 pval = as.matrix(merged[,seq(1, 35, by = 2)])
-chisq = as.matrix(merged[,c(1,seq(2, 34, by = 2))])
+chisq = as.matrix(merged[,c(seq(2, 34, by = 2))])
 sorted_chi = sort(as.vector(chisq),decreasing = F)
 sorted_chi5 = sort(as.vector(chisq[,5]),decreasing = F)
 
+head(sorted_chi5) * 61
+
+
 i = 1
 for(i in 1:10){#changer ici pour plus
-  a = which(as.numeric(chisq[,2:ncol(chisq)]) == sorted_chi7[i])
+  a = which(as.numeric(chisq[,1:ncol(chisq)]) == sorted_chi5[i])
   col = ceiling(a / 61) #r magic <3
   mod = a - ((col-1) * 61)
+  print(col)
   print(as.character(pval[mod,1]))
 }
+#     "module_692" *
+# [1] "module_640" *
+# [1] "module_697" * 
+# [1] "module_572" *
+# [1] "module_587"
+# [1] "module_568"
+# [1] "module_621"
+# [1] "module_562"
+# [1] "module_560"
+# [1] "module_622"
+
 
 min(sorted_chi)
 
-head(pval)
+head(pval) 
 head(as.vector(pval[,2:18]))
 
 alpha = 0.05/(61)
 
 sorted = sort(as.vector(pval[,2:11]), decreasing = F)
 sorted = as.numeric(sorted)
-min(sorted) < 0.05/61
+
+head(sorted)*61
+
+
 
 
 #trouver le nom des 10 modules les plus significatifs pour Cynthia

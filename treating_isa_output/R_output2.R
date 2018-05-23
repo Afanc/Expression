@@ -81,4 +81,54 @@ genenames_ensg = function(module){
   return(droplevels(names))
 }
 
-genenames_ensg(1)
+length(genenames_ensg(592))
+
+genenames(592)
+
+file.create("../export/module592DAVID.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames_ensg(592)),
+        sep = "\t", 
+        file = "../export/module592DAVID.txt",
+        append = T,
+        ncolumns = 1)
+
+file.create("../export/module592DAVIDetz.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames(592)),
+      sep = "\t", 
+      file = "../export/module592DAVIDetz.txt",
+      append = T,
+      ncolumns = 1)
+
+file.create("../export/module692DAVID.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames_ensg(692)),
+      sep = "\t", 
+      file = "../export/module692DAVID.txt",
+      append = T,
+      ncolumns = 1)
+
+file.create("../export/module640DAVID.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames_ensg(640)),
+      sep = "\t", 
+      file = "../export/module640DAVID.txt",
+      append = T,
+      ncolumns = 1)
+
+file.create("../export/module697DAVID.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames_ensg(697)),
+      sep = "\t", 
+      file = "../export/module697DAVID.txt",
+      append = T,
+      ncolumns = 1)
+
+file.create("../export/module572DAVID.txt", showWarnings = FALSE)
+
+write(x = as.character(genenames_ensg(572)),
+      sep = "\t", 
+      file = "../export/module572DAVID.txt",
+      append = T,
+      ncolumns = 1)
